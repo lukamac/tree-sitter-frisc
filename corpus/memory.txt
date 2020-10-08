@@ -1,0 +1,74 @@
+============
+Memory
+============
+
+LABEL   LOAD R0, (LABEL)
+        LOADB R1, (0FF)
+        LOADH R6, (R0)
+        LOAD R7, (SP + 4)
+
+        STORE R0, (LABEL)
+        STOREH R1, (SP)
+        STOREB R1, (SP + %D 16)
+
+        POP R0
+        PUSH SP
+
+---
+
+(source_file
+    (label)
+    (memory_operation
+        (load_operation
+            (dest
+                (register))
+            (immediate
+                (label))))
+    (memory_operation
+        (load_operation
+            (dest
+                (register))
+            (immediate
+                (number
+                    (hex)))))
+    (memory_operation
+        (load_operation
+            (dest
+                (register))
+            (reg_offset
+                (register))))
+    (memory_operation
+        (load_operation
+            (dest
+                (register))
+            (reg_offset
+                (register)
+                (number
+                    (hex)))))
+    (memory_operation
+        (store_operation
+            (src1
+                (register))
+            (immediate
+                (label))))
+    (memory_operation
+        (store_operation
+            (src1
+                (register))
+            (reg_offset
+                (register))))
+    (memory_operation
+        (store_operation
+            (src1
+                (register))
+            (reg_offset
+                (register)
+                (number
+                    (dec)))))
+    (memory_operation
+        (stack_operation
+            (register)))
+    (memory_operation
+        (stack_operation
+            (register))))
+

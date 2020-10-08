@@ -1,0 +1,14 @@
+===========
+Conditions
+===========
+
+    JP_C KRAJ
+
+---
+
+(source_file
+    (control_operation
+        (jump
+            (condition)
+            (immediate
+                (label)))))

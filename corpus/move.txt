@@ -1,0 +1,22 @@
+=========
+Move
+=========
+
+    MOVE 0, R0
+    MOVE SR, R1
+
+---
+
+(source_file
+    (move
+        (src2
+            (immediate
+                (number
+                    (hex))))
+        (dest
+            (register)))
+    (move
+        (src2
+            (register))
+        (dest
+            (register))))

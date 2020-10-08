@@ -1,0 +1,18 @@
+=================
+Comments
+=================
+
+; This is a comment
+   ; This is a comment
+
+    ADD R0, R0, R0 ; Comment
+
+---
+
+(source_file
+    (comment)
+    (comment)
+    (binary_operation
+        (alu_mnemonic) (src1 (register)) (src2 (register)) (dest (register)))
+    (comment)
+)

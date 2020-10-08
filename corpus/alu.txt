@@ -1,0 +1,47 @@
+=================
+ALU operations
+=================
+
+    ADD R0, 20, R5
+    ADC R1, R1, R1
+    AND R1, R2, R3
+    OR  R0, R0, R0
+
+---
+
+(source_file
+    (binary_operation
+        (alu_mnemonic)
+        (src1
+            (register))
+        (src2
+            (immediate
+                (number
+                    (hex))))
+        (dest
+            (register)))
+    (binary_operation
+        (alu_mnemonic)
+        (src1
+            (register))
+        (src2
+            (register))
+        (dest
+            (register)))
+    (binary_operation
+        (alu_mnemonic)
+        (src1
+            (register))
+        (src2
+            (register))
+        (dest
+            (register)))
+    (binary_operation
+        (alu_mnemonic)
+        (src1
+            (register))
+        (src2
+            (register))
+        (dest
+            (register))))
+

@@ -1,0 +1,22 @@
+{
+  "name": "tree-sitter-frisc",
+  "version": "0.0.1",
+  "description": "Parser for FRISC assembly.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "frisc",
+    "assembly",
+    "parser"
+  ],
+  "author": "Luka Macan",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.14.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.17.1"
+  }
+}

@@ -1,0 +1,25 @@
+============
+Preprocessor
+============
+
+    ORG 0
+
+KONST   EQU 1
+KONST2 EQU 5
+
+    DW 1, 2, 3
+    DB %B 10110101
+    DS %D 20, %D 600
+    DH %O 234
+    
+---
+
+(source_file
+    (org (number (hex)))
+    (label) (equ (number (hex)))
+    (label) (equ (number (hex)))
+    (define_memory (numbers (number (hex)) (number (hex)) (number (hex))))
+    (define_memory (numbers (number (bin))))
+    (define_memory (numbers (number (dec)) (number (dec))))
+    (define_memory (numbers (number (oct))))
+)

@@ -1,0 +1,22 @@
+=========
+Compare
+=========
+
+    CMP R0, R1
+    CMP R3, 2
+
+---
+
+(source_file
+    (compare
+        (src1
+            (register))
+        (src2
+            (register)))
+    (compare
+        (src1
+            (register))
+        (src2
+            (immediate
+                (number
+                    (hex))))))
