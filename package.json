@@ -1,7 +1,7 @@
 {
-  "name": "@lmacan/tree-sitter-frisc",
-  "version": "0.0.2",
-  "description": "Parser for FRISC assembly.",
+  "name": "tree-sitter-frisc",
+  "version": "1.0.0",
+  "description": "FRISC grammar for tree-sitter",
   "repository": "https://github.com/lukamac/tree-sitter-frisc",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "assembly",
     "parser"
   ],
-  "author": "Luka Macan",
+  "author": "Luka Macan <luka.macan@fer.hr>",
   "license": "MIT",
   "dependencies": {
     "nan": "^2.14.1"
