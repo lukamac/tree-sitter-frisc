@@ -60,7 +60,7 @@ module.exports = grammar({
         ),
 
         define_memory: $ => seq(
-            /D[WHBS]/, $.numbers
+            /D[WHBS]/, choice($._numbers, $.string_literal)
         ),
 
         equ: $ => seq(
@@ -139,7 +139,7 @@ module.exports = grammar({
 
         label: $ => token(prec(-1, /[a-zA-Z]\w*/)),
 
-        numbers: $ => seq(
+        _numbers: $ => seq(
             $.number, repeat(seq(',', $.number))
         ),
 
@@ -148,6 +148,12 @@ module.exports = grammar({
             $.bin,
             $.oct,
             $.hex
+        ),
+
+        string_literal: $ => seq(
+            '"',
+            token.immediate(prec(1, /[^\\"\n]+/)),
+            '"',
         ),
 
         dec: $ => /%D -?[0-9]+/,

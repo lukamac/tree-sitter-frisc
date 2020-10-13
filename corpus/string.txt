@@ -1,0 +1,10 @@
+===========
+String
+===========
+
+    DS "Hello world"
+
+---
+
+(source_file
+    (define_memory (string_literal)))

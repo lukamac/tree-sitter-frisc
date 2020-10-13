@@ -212,8 +212,17 @@
           "value": "D[WHBS]"
         },
         {
-          "type": "SYMBOL",
-          "name": "numbers"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_numbers"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "string_literal"
+            }
+          ]
         }
       ]
     },
@@ -735,7 +744,7 @@
         }
       }
     },
-    "numbers": {
+    "_numbers": {
       "type": "SEQ",
       "members": [
         {
@@ -778,6 +787,30 @@
         {
           "type": "SYMBOL",
           "name": "hex"
+        }
+      ]
+    },
+    "string_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\""
+        },
+        {
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 1,
+            "content": {
+              "type": "PATTERN",
+              "value": "[^\\\\\"\\n]+"
+            }
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "\""
         }
       ]
     },
