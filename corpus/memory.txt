@@ -18,57 +18,13 @@ LABEL   LOAD R0, (LABEL)
 
 (source_file
     (label)
-    (memory_operation
-        (load_operation
-            (dest
-                (register))
-            (immediate
-                (label))))
-    (memory_operation
-        (load_operation
-            (dest
-                (register))
-            (immediate
-                (number
-                    (hex)))))
-    (memory_operation
-        (load_operation
-            (dest
-                (register))
-            (reg_offset
-                (register))))
-    (memory_operation
-        (load_operation
-            (dest
-                (register))
-            (reg_offset
-                (register)
-                (number
-                    (hex)))))
-    (memory_operation
-        (store_operation
-            (src1
-                (register))
-            (immediate
-                (label))))
-    (memory_operation
-        (store_operation
-            (src1
-                (register))
-            (reg_offset
-                (register))))
-    (memory_operation
-        (store_operation
-            (src1
-                (register))
-            (reg_offset
-                (register)
-                (number
-                    (dec)))))
-    (memory_operation
-        (stack_operation
-            (register)))
-    (memory_operation
-        (stack_operation
-            (register))))
+    (load (register) (immediate (label)))
+    (load (register) (immediate (number (hex))))
+    (load (register) (reg_offset (register)))
+    (load (register) (reg_offset (register) (number (hex))))
+    (store (register) (immediate (label)))
+    (store (register) (reg_offset (register)))
+    (store (register) (reg_offset (register) (number (dec))))
+    (stack_operation (register))
+    (stack_operation (register)))
 

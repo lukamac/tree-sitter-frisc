@@ -1,44 +1,47 @@
 module.exports = grammar({
     name: 'frisc',
 
-    word: $ => $.label,
+    extras: $ => [
+        /\s/,
+        $.comment,
+    ],
 
     rules: {
-        source_file: $ => repeat(choice($.comment, $._statement)),
+        source_file: $ => repeat($._statement),
 
         _statement: $ => seq(
             optional($.label),
             choice(
-                $.binary_operation,
+                $.alu_operation,
                 $.compare,
                 $.move,
-                $.memory_operation,
-                $.control_operation,
+                $._memory_operation,
+                $._control_operation,
                 $._preprocessor
             )
         ),
 
-        comment: $ => /;.*/,
+        comment: $ => token(/;[^\r\n]*/),
 
-        binary_operation: $ => seq(
-            $.alu_mnemonic, $.src1, ',', $.src2, ',', $.dest
+        alu_operation: $ => seq(
+            $._alu_mnemonic, $._src1, ',', $._src2, ',', $._dest
         ),
 
         compare: $ => seq(
-            'CMP', $.src1, ',', $.src2
+            'CMP', $._src1, ',', $._src2
         ),
 
         move: $ => seq(
-            'MOVE', $.src2, ',', $.dest
+            'MOVE', $._src2, ',', $._dest
         ),
 
-        memory_operation: $ => choice(
-            $.load_operation,
-            $.store_operation,
+        _memory_operation: $ => choice(
+            $.load,
+            $.store,
             $.stack_operation
         ),
 
-        control_operation: $ => choice(
+        _control_operation: $ => choice(
             $.jump,
             $.jump_relative,
             $.call,
@@ -84,19 +87,19 @@ module.exports = grammar({
             'HALT', optional($.condition)
         ),
 
-        condition: $ => choice(
-            '_C', '_NC', '_V', '_NV', '_N', '_NN',
-            '_M', '_P', '_Z', '_NZ', '_EQ', '_NE',
-            '_ULE', '_UGT', '_ULT', '_UGE', '_SLE',
-            '_SGT', '_SLT', '_SGE'
+        condition: $ => seq('_', choice(
+            'C', 'NC', 'V', 'NV', 'N', 'NN',
+            'M', 'P', 'Z', 'NZ', 'EQ', 'NE',
+            'ULE', 'UGT', 'ULT', 'UGE', 'SLE',
+            'SGT', 'SLT', 'SGE'
+        )),
+
+        load: $ => seq(
+            /LOAD[BH]?/, $._dest, ',', '(', choice($.immediate, $.reg_offset), ')'
         ),
 
-        load_operation: $ => seq(
-            /LOAD[BH]?/, $.dest, ',', '(', choice($.immediate, $.reg_offset), ')'
-        ),
-
-        store_operation: $ => seq(
-            /STORE[BH]?/, $.src1, ',', '(', choice($.immediate, $.reg_offset), ')'
+        store: $ => seq(
+            /STORE[BH]?/, $._src1, ',', '(', choice($.immediate, $.reg_offset), ')'
         ),
 
         reg_offset: $ => seq(
@@ -108,19 +111,19 @@ module.exports = grammar({
             choice('POP', 'PUSH'), $.register
         ),
 
-        alu_mnemonic: $ => choice(
+        _alu_mnemonic: $ => token(choice(
             'ADD', 'ADC', 'SUB', 'SBC', 'AND', 'OR',
             'XOR', 'SHL', 'SHR', 'ASHR', 'ROTL', 'ROTR'
-        ),
+        )),
 
-        src1: $ => $.register,
+        _src1: $ => $.register,
 
-        src2: $ => choice(
-            prec(1, $.register),
+        _src2: $ => choice(
+            $.register,
             $.immediate
         ),
 
-        dest: $ => $.register,
+        _dest: $ => $.register,
 
         register: $ => choice(
             /R[0-7]/,
@@ -131,10 +134,10 @@ module.exports = grammar({
 
         immediate: $ => choice(
             $.label,
-            prec(1, $.number)
+            $.number
         ),
 
-        label: $ => /[a-zA-Z][a-zA-Z0-9]*/,
+        label: $ => token(prec(-1, /[a-zA-Z]\w*/)),
 
         numbers: $ => seq(
             $.number, repeat(seq(',', $.number))
@@ -150,6 +153,6 @@ module.exports = grammar({
         dec: $ => /%D -?[0-9]+/,
         bin: $ => /%B -?[01]+/,
         oct: $ => /%O -?[0-7]+/,
-        hex: $ => /-?[0-9][0-9a-fA-F]*/
+        hex: $ => choice(/-?[0-9][0-9a-fA-F]*/, /%H -?[0-9a-fA-F]+/)
     }
 });

@@ -10,38 +10,12 @@ ALU operations
 ---
 
 (source_file
-    (binary_operation
-        (alu_mnemonic)
-        (src1
-            (register))
-        (src2
-            (immediate
-                (number
-                    (hex))))
-        (dest
-            (register)))
-    (binary_operation
-        (alu_mnemonic)
-        (src1
-            (register))
-        (src2
-            (register))
-        (dest
-            (register)))
-    (binary_operation
-        (alu_mnemonic)
-        (src1
-            (register))
-        (src2
-            (register))
-        (dest
-            (register)))
-    (binary_operation
-        (alu_mnemonic)
-        (src1
-            (register))
-        (src2
-            (register))
-        (dest
-            (register))))
+    (alu_operation
+        (register) (immediate (number (hex))) (register))
+    (alu_operation
+        (register) (register) (register))
+    (alu_operation
+        (register) (register) (register))
+    (alu_operation
+        (register) (register) (register)))
 

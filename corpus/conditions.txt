@@ -2,13 +2,15 @@
 Conditions
 ===========
 
+KRAJ JR 4
     JP_C KRAJ
+    RETI_NV
+    HALT_SLE
 
 ---
 
 (source_file
-    (control_operation
-        (jump
-            (condition)
-            (immediate
-                (label)))))
+    (label) (jump_relative (immediate (number (hex))))
+    (jump (condition) (immediate (label)))
+    (ret (condition))
+    (halt (condition)))

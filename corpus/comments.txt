@@ -12,7 +12,7 @@ Comments
 (source_file
     (comment)
     (comment)
-    (binary_operation
-        (alu_mnemonic) (src1 (register)) (src2 (register)) (dest (register)))
+    (alu_operation
+        (register) (register) (register))
     (comment)
 )
