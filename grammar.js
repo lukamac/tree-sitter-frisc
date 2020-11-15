@@ -159,6 +159,6 @@ module.exports = grammar({
         dec: $ => /%D -?[0-9]+/,
         bin: $ => /%B -?[01]+/,
         oct: $ => /%O -?[0-7]+/,
-        hex: $ => choice(/-?[0-9][0-9a-fA-F]*/, /%H -?[0-9a-fA-F]+/)
+        hex: $ => token(choice(/-?[0-9][0-9a-fA-F]*/, /%H -?[0-9a-fA-F]+/))
     }
 });
